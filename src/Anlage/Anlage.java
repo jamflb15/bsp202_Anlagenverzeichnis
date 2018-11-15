@@ -70,6 +70,15 @@ public class Anlage {
 
     public Anlage() {
     }
+
+    public Anlage(String bezeichnung, int ak, float inbetriebnahme, float nd) {
+        this.bezeichnung = bezeichnung;
+        this.ak = ak;
+        this.inbetriebnahme = inbetriebnahme;
+        this.nd = nd;
+    }
+    
+    
     
     
     

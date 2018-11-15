@@ -74,12 +74,8 @@ public class model extends AbstractTableModel{
                             tokens[0].trim(),
                             Integer.parseInt(tokens[1].trim().replace(".", "")),
                             Float.parseFloat(tokens[2].trim().replace(",", ".")),
-                            Float.parseFloat(tokens[3].trim()),
-                            Float.parseFloat(tokens[4].trim()),
-                            Float.parseFloat(tokens[5].trim()),
-                            Float.parseFloat(tokens[6].trim()),
-                            Float.parseFloat(tokens[7].trim()),
-                            Float.parseFloat(tokens[8].trim())));
+                            Float.parseFloat(tokens[3].trim().replace(",", "."))));
+                   
                 }
             }
         } catch (FileNotFoundException e) {
@@ -98,13 +94,24 @@ public class model extends AbstractTableModel{
                 e.printStackTrace();
             }
         }   
-        return end;
+        list= end;
+    }
+    public String toString(ArrayList<Anlage> neu){
+        neu = model.readAnlageDaten("anlagenverzeichnis.csv");
+        String ausgabe = "Bezeichnung ; AK ; Inbetriebnahme ; ND \n";
+        for(int i = 0; i < neu.size(); i++){
+           ausgabe += neu.get(i).getBezeichnung() + " ; " + neu.get(i).getAk() + " ; " + neu.get(i).getInbetriebnahme() + " ; " + neu.get(i).getNd() + "\n";
+        }
+        return ausgabe;   
+    }
+    
+    public void calc(){
+        
     }
     
     public static void main(String[] args) {
         model m = new model();
-        ArrayList neu = new ArrayList();
-        neu = model.readWetterDaten("anlagenverzeichnis.csv");
-        System.out.println(neu.toString());
+        ArrayList<Anlage> neu = m.readAnlageDaten("anlagenverzeichnis.csv");
+        System.out.println(m.toString(neu));
     }
 }
